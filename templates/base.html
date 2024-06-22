@@ -21,11 +21,11 @@
             </div>
             <div class="field">
                 <label>Author</label>
-                <input type="text" name="title" placeholder="Enter Author..."><br>
+                <input type="text" name="author" placeholder="Enter Author..."><br>
             </div>
             <div class="field">
                 <label>Description</label>
-                <input type="text" name="title" placeholder="Description..."><br>
+                <input type="text" name="description" placeholder="Description..."><br>
             </div>
             <button class="ui blue button" type="submit">Add</button>
         </form>
@@ -36,7 +36,7 @@
         <div class="ui segment">
             <p class="ui big header">{{book.id }} | {{ book.title }}</p>
 
-            {% if todo.read == False %}
+            {% if book.read == False %}
             <span class="ui gray label">Haven't Read Yet</span>
             {% else %}
             <span class="ui green label">Finished!</span>
