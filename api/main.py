@@ -1,5 +1,7 @@
 import os
 from fastapi import FastAPI, Depends, Request, Form, status
+from dotenv import load_dotenv
+load_dotenv()
 
 from starlette.responses import RedirectResponse
 from starlette.templating import Jinja2Templates
