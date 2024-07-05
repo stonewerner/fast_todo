@@ -25,15 +25,15 @@ def get_db():
 
 @app.get("/")
 def root(request: Request, db: Session = Depends(get_db)):
-    todos = db.query(models.Todo).all()
+    books = db.query(models.Book).all()
     return templates.TemplateResponse("base.html",
-                                      {"request": request, "todo_list":todos})
+                                      {"request": request, "book_list":books})
 
 
 @app.post("/add")
-def add(request: Request, title: str = Form(...), db: Session = Depends(get_db)):
-    new_todo = models.Todo(title=title)
-    db.add(new_todo)
+def add(request: Request, title: str = Form(...), author: str = Form(...), description: str = Form(...), db: Session = Depends(get_db)):
+    new_book = models.Book(title=title, author=author, description=description)
+    db.add(new_book)
     db.commit()
 
     url = app.url_path_for("root")
@@ -42,8 +42,8 @@ def add(request: Request, title: str = Form(...), db: Session = Depends(get_db))
 
 @app.get("/update/{id}")
 def update(request: Request, id: int, db: Session = Depends(get_db)):
-    todo = db.query(models.Todo).filter(models.Todo.id == id).first()
-    todo.complete = not todo.complete
+    book = db.query(models.Book).filter(models.Book.id == id).first()
+    book.read = not book.read
     db.commit()
 
     url = app.url_path_for("root")
@@ -52,8 +52,8 @@ def update(request: Request, id: int, db: Session = Depends(get_db)):
 
 @app.get("/delete/{id}")
 def delete(request: Request, id: int, db: Session = Depends(get_db)):
-    todo = db.query(models.Todo).filter(models.Todo.id == id).first()
-    db.delete(todo)
+    book = db.query(models.Book).filter(models.Book.id == id).first()
+    db.delete(book)
     db.commit()
 
     url = app.url_path_for("root")
