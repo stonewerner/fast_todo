@@ -1,3 +1,4 @@
+import os
 from fastapi import FastAPI, Depends, Request, Form, status
 
 from starlette.responses import RedirectResponse
@@ -5,12 +6,13 @@ from starlette.templating import Jinja2Templates
 
 from sqlalchemy.orm import Session
 
-import models
-from database import SessionLocal, engine
+import api.models as models
+from api.database import SessionLocal, engine
 
 models.Base.metadata.create_all(bind=engine)
 
-templates = Jinja2Templates(directory="templates")
+templates_dir = os.path.join(os.path.dirname(__file__), "templates")
+templates = Jinja2Templates(directory=templates_dir)
 
 app = FastAPI()
 
