@@ -1,3 +1,2 @@
 # fast_todo
-simple todo webapp using fastapi
-made into a book service
+simple book wishlist web app using FastAPI
